@@ -19,7 +19,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'nginx.vim'
 
 filetype plugin indent on     " required!
-
+syntax on
 
 set ignorecase
 set incsearch
