@@ -16,6 +16,7 @@ Bundle 'jslint.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'vim-stylus'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'nginx.vim'
 
 filetype plugin indent on     " required!
 
