@@ -17,6 +17,9 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'vim-stylus'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'nginx.vim'
+Bundle 'briancollins/vim-jst'
+Bundle 'html5.vim'
+Bundle 'HTML5-Syntax-File'
 
 filetype plugin indent on     " required!
 syntax on
