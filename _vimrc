@@ -1,25 +1,25 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'thinca/vim-ref'
-Bundle 'thinca/vim-quickrun'
-Bundle 'ZenCoding.vim'
-Bundle 'inkpot'
-Bundle 'wombat256.vim'
-Bundle 'Sass'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'jslint.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'vim-stylus'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nginx.vim'
-Bundle 'briancollins/vim-jst'
-Bundle 'html5.vim'
-Bundle 'HTML5-Syntax-File'
+if has('vim_starting')
+  set rtp+=~/.vim/neobundle.git/
+  call neobundle#rc(expand('~/.vim/'))
+endif
+
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'ZenCoding.vim'
+NeoBundle 'inkpot'
+NeoBundle 'wombat256.vim'
+NeoBundle 'Sass'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'jslint.vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'vim-stylus'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'nginx.vim'
+NeoBundle 'briancollins/vim-jst'
+NeoBundle 'html5.vim'
 
 filetype plugin indent on     " required!
 syntax on
