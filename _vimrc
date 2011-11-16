@@ -23,6 +23,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nginx.vim'
 NeoBundle 'briancollins/vim-jst'
 NeoBundle 'html5.vim'
+NeoBundle 'tpope/vim-git'
 
 filetype plugin indent on     " required!
 syntax on
