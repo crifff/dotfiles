@@ -98,6 +98,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+#nodejs
 if [ -f ~/.nvm/nvm.sh ]; then
 . ~/.nvm/nvm.sh
 nvm use latest
@@ -107,3 +108,28 @@ if [ "$TERM" = "screen" ]; then
 	PROMPT_COMMAND=~/screen_minidir
 	stty start ''
 fi
+
+#ログイン時SSH-Agent起動してエージェントフォワードさせる
+echo -n "ssh-agent: "
+source ~/.ssh-agent-info
+ssh-add -l >&/dev/null
+if [ $? == 2 ] ; then
+  echo -n "ssh-agent: restart...."
+  ssh-agent >~/.ssh-agent-info
+  source ~/.ssh-agent-info
+fi
+if ssh-add -l >&/dev/null ; then
+  echo "ssh-agent: Identity is already stored."
+else
+  ssh-add
+fi
+
+#Git関連
+export GIT_PAGER='less -r -I'
+alias gco="git checkout"
+alias gst="git status"
+alias gci="git commit"
+alias gdi="git diff"
+alias gdic="git diff -b --color-words"
+alias gbr="git branch"
+alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] %s\""
