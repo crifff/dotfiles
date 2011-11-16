@@ -6,6 +6,7 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/'))
 endif
 
+NeoBundle 'sudo.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'ZenCoding.vim'
