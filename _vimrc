@@ -8,6 +8,8 @@ endif
 
 NeoBundle 'sudo.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'inkpot'
@@ -50,4 +52,7 @@ nmap g* g*zz
 nmap g# g#zz
 
 "JSLint
-let g:JSLintHighlightErrorLine = 0
+"let g:JSLintHighlightErrorLine = 0
+
+let g:vimfiler_as_default_explorer = 1
+let g:neocomplcache_enable_at_startup = 1
