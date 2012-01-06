@@ -19,10 +19,10 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-stylus'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nginx.vim'
-NeoBundle 'html5.vim'
 NeoBundle 'tpope/vim-git'
-NeoBundle 'vim-scripts/php.vim-html-enhanced'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'vim-scripts/php.vim-html-enhanced'
+NeoBundle 'xenoterracide/html.vim'
 
 filetype plugin indent on     " required!
 syntax on
