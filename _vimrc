@@ -15,6 +15,8 @@ NeoBundle 'ZenCoding.vim'
 NeoBundle 'inkpot'
 NeoBundle 'wombat256.vim'
 NeoBundle 'Sass'
+NeoBundle 'spencertipping/js-vim-highlighter'
+NeoBundle 'pangloss/vim-javascript' 
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-stylus'
 NeoBundle 'kchmck/vim-coffee-script'
@@ -23,6 +25,10 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-scripts/php.vim-html-enhanced'
 NeoBundle 'xenoterracide/html.vim'
+NeoBundle 'surround.vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'toritori0318/vim-redmine'
+NeoBundle 'Lokaltog/vim-powerline'
 
 filetype plugin indent on     " required!
 syntax on
@@ -117,7 +123,7 @@ inoremap pumvisible() ? neocomplcache#close_popup() : "¥"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
@@ -150,3 +156,8 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 
 nmap ,l :execute '!php -l %'<CR>
+
+let g:redmine_auth_site = 'http://redmine.authense.co.jp'
+let g:redmine_auth_key  = '8f4e91c28a7cbbc1b8d8c022271a1d65e5b05d69'
+let g:redmine_author_id = '3'
+let g:redmine_project_id = '1'
