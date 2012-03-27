@@ -11,7 +11,7 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Sixeight/unite-grep'
-"NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'thinca/vim-quickrun'
@@ -28,7 +28,6 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'vim-scripts/php.vim-html-enhanced'
 NeoBundle 'xenoterracide/html.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'mattn/webapi-vim'
@@ -38,6 +37,9 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'edsono/vim-matchit'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'othree/eregex.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'akiyan/vim-textobj-php'
 
 filetype plugin indent on     " required!
 syntax on
@@ -48,6 +50,7 @@ set hlsearch
 set number
 set t_Co=256
 set backspace=2
+set smartindent
 
 set expandtab
 set shiftwidth=2
@@ -292,4 +295,10 @@ let g:quickrun_config['php.unit'] = {
       \ 'command': 'phpunit',
       \ 'outputter': 'phpunit_outputter',
       \ }
+
+"map disable cursor key
+noremap <Left> ""
+noremap <Right> ""
+noremap <Up> ""
+noremap <Down> ""
 
