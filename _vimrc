@@ -40,6 +40,7 @@ NeoBundle 'othree/eregex.vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'akiyan/vim-textobj-php'
+NeoBundle 'tpope/vim-fugitive'
 
 filetype plugin indent on     " required!
 syntax on
@@ -297,8 +298,11 @@ let g:quickrun_config['php.unit'] = {
       \ }
 
 "map disable cursor key
-noremap <Left> ""
-noremap <Right> ""
-noremap <Up> ""
-noremap <Down> ""
-
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+map! <Left> <Nop>
+map! <Right> <Nop>
+map! <Up> <Nop>
+map! <Down> <Nop>
