@@ -41,6 +41,7 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 filetype plugin indent on     " required!
 syntax on
@@ -140,10 +141,12 @@ nnoremap <silent> ,uc :Unite bookmark<CR>
 nnoremap <silent> ,u. :Unite file_mru<CR>
 nnoremap <silent> ,uy :Unite -buffer-name=register register<CR>
 nnoremap <silent> ,ug :Unite grep%:-iHRn<CR>
+
 ""ESC二回で閉じる
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 autocmd FileType unite call s:unite_my_settings()
+
 function! s:unite_my_settings()"{{{
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
@@ -184,8 +187,6 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
     \ }
 
 " Define keyword.
@@ -302,7 +303,3 @@ map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
-map! <Left> <Nop>
-map! <Right> <Nop>
-map! <Up> <Nop>
-map! <Down> <Nop>
