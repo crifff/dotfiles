@@ -69,6 +69,10 @@ alias gdic="git diff -b --color-words"
 alias gbr="git branch"
 alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] %s\""
 
+git completion
+autoload bashcompinit
+bashcompinit
+source ~/dotfiles/git-completion.bash
 
 ## GNU grepがあったら優先して使う。
 if type ggrep > /dev/null 2>&1; then
