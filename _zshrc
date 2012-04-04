@@ -28,7 +28,7 @@ export EDITOR=vim
 
 #補完
 autoload -U compinit
-compinit -u
+compinit 
 
 #cdの履歴を表示
 setopt autopushd
