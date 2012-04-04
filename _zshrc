@@ -45,14 +45,20 @@ setopt list_types
 setopt COMPLETE_IN_WORD
 
 #alias
-alias vim=~/source/vim73/src/vim
-alias vi=~/source/vim73/src/vim
-alias ls="ls -G"
-zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-# some more ls aliases
+if [ -x ~/source/vim73/src/vim ]; then
+  alias vim=~/source/vim73/src/vim
+  alias vi=~/source/vim73/src/vim
+fi
+
+if [ -x /usr/bin/git ]; then
+  alias git=/usr/bin/git
+fi
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+
 #Git関連
 export GIT_PAGER='less -r -I'
 alias gco="git checkout"
@@ -62,10 +68,7 @@ alias gdi="git diff"
 alias gdic="git diff -b --color-words"
 alias gbr="git branch"
 alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] %s\""
-alias vim=~/source/vim73/src/vim
-alias vi=~/source/vim73/src/vim
 
-alias git=/usr/bin/git
 
 ## GNU grepがあったら優先して使う。
 if type ggrep > /dev/null 2>&1; then
@@ -104,4 +107,17 @@ if ssh-add -l >&/dev/null ; then
   echo "ssh-agent: Identity is already stored."
 else
   ssh-add
+fi
+
+#vcs_infoならリポジトリ名表示
+if [ -x vcs_info ]; then
+  autoload -Uz vcs_info
+  zstyle ':vcs_info:*' formats '(%s)-[%b]'
+  zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+  precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+  }
+  RPROMPT="%1(v|%F{green}%1v%f|)"
 fi
