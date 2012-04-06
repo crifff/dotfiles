@@ -44,6 +44,15 @@ setopt list_types
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
+if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+  source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+  function zle-line-init () {
+  auto-fu-init
+}
+zle -N zle-line-init
+zstyle ':completion:*' completer _oldlist _complete
+fi
+
 #alias
 if [ -x ~/source/vim73/src/vim ]; then
   alias vim=~/source/vim73/src/vim
@@ -69,34 +78,34 @@ alias gdic="git diff -b --color-words"
 alias gbr="git branch"
 alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] %s\""
 
-git completion
-autoload bashcompinit
-bashcompinit
-source ~/dotfiles/git-completion.bash
+#git completion
+#source ~/dotfiles/git-completion.bash
+#autoload bashcompinit
+#bashcompinit
 
 ## GNU grepがあったら優先して使う。
-if type ggrep > /dev/null 2>&1; then
-    alias grep=ggrep
-fi
+#if type ggrep > /dev/null 2>&1; then
+#    alias grep=ggrep
+#fi
 ## デフォルトオプションの設定
-export GREP_OPTIONS
+#export GREP_OPTIONS
 ### バイナリファイルにはマッチさせない。
-GREP_OPTIONS="--binary-files=without-match"
+#GREP_OPTIONS="--binary-files=without-match"
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+#GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 ### 拡張子が.tmpのファイルは無視する。
-GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
+#GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 ## 管理用ディレクトリを無視する。
-if grep --help | grep -q -- --exclude-dir; then
-    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
-fi
+#if grep --help | grep -q -- --exclude-dir; then
+#    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
+#    GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
+#    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
+#    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+#fi
 ### 可能なら色を付ける。
-if grep --help | grep -q -- --color; then
-    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-fi
+#if grep --help | grep -q -- --color; then
+#    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
+#fi
 
 #ログイン時SSH-Agent起動してエージェントフォワードさせる
 echo -n "ssh-agent: "
@@ -114,7 +123,8 @@ else
 fi
 
 #vcs_infoならリポジトリ名表示
-if [ -x vcs_info ]; then
+autoload -Uz is-at-least
+if is-at-least 4.3.7; then
   autoload -Uz vcs_info
   zstyle ':vcs_info:*' formats '(%s)-[%b]'
   zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
@@ -125,3 +135,9 @@ if [ -x vcs_info ]; then
   }
   RPROMPT="%1(v|%F{green}%1v%f|)"
 fi
+
+#_Z_CMD=j
+source ~/.zsh/z/z.sh
+precmd() {
+  _z --add "$(pwd -P)"
+}
