@@ -44,13 +44,18 @@ setopt list_types
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
-if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-  source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-  function zle-line-init () {
-  auto-fu-init
-}
-zle -N zle-line-init
-zstyle ':completion:*' completer _oldlist _complete
+autoload -Uz is-at-least
+
+#自動補完auto-fu.zsh
+if is-at-least 4.3.10; then
+  if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+      auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+  fi
 fi
 
 #alias
@@ -84,17 +89,17 @@ alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] 
 #bashcompinit
 
 ## GNU grepがあったら優先して使う。
-#if type ggrep > /dev/null 2>&1; then
-#    alias grep=ggrep
-#fi
+if type ggrep > /dev/null 2>&1; then
+    alias grep=ggrep
+fi
 ## デフォルトオプションの設定
-#export GREP_OPTIONS
+export GREP_OPTIONS
 ### バイナリファイルにはマッチさせない。
-#GREP_OPTIONS="--binary-files=without-match"
+GREP_OPTIONS="--binary-files=without-match"
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-#GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 ### 拡張子が.tmpのファイルは無視する。
-#GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
+GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 ## 管理用ディレクトリを無視する。
 #if grep --help | grep -q -- --exclude-dir; then
 #    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
@@ -102,10 +107,10 @@ alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] 
 #    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
 #    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
 #fi
-### 可能なら色を付ける。
-#if grep --help | grep -q -- --color; then
-#    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-#fi
+## 可能なら色を付ける。
+if grep --help | grep -q -- --color; then
+    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
+fi
 
 #ログイン時SSH-Agent起動してエージェントフォワードさせる
 echo -n "ssh-agent: "
@@ -122,17 +127,21 @@ else
   ssh-add
 fi
 
-#vcs_infoならリポジトリ名表示
-autoload -Uz is-at-least
+#Gitのブランチ情報を表示する
 if is-at-least 4.3.7; then
+  autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
+  zstyle ':vcs_info:*' enable git
   zstyle ':vcs_info:*' formats '(%s)-[%b]'
   zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-  precmd () {
-    psvar=()
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' max-exports 6
+  function _precmd_vcs_info () {
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
   }
+  add-zsh-hook precmd _precmd_vcs_info
   RPROMPT="%1(v|%F{green}%1v%f|)"
 fi
 
