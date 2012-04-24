@@ -27,8 +27,8 @@ export LANG=ja_JP.UTF-8
 export EDITOR=vim
 
 #補完
-autoload -U compinit
-compinit 
+#autoload -U compinit
+#compinit 
 
 #cdの履歴を表示
 setopt autopushd
@@ -82,6 +82,7 @@ alias gdi="git diff"
 alias gdic="git diff -b --color-words"
 alias gbr="git branch"
 alias glog="git log --graph --date-order -C -M --pretty=format:\"<%h> %cd [%an] %s\""
+alias gr="log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'"
 
 #git completion
 #source ~/dotfiles/git-completion.bash
