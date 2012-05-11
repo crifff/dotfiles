@@ -41,6 +41,9 @@ setopt list_packed
 #補完一覧ファイル種別表示
 setopt list_types
 
+#matchしなくても警告しない
+setopt no_nomatch
+
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
@@ -151,3 +154,7 @@ source ~/.zsh/z/z.sh
 precmd() {
   _z --add "$(pwd -P)"
 }
+
+if [ -x ~/.rbenv/bin/ ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+fi
