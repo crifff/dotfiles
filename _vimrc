@@ -42,6 +42,7 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'tpope/vim-markdown'
 
 filetype plugin indent on     " required!
 syntax on
