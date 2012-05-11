@@ -21,6 +21,7 @@ NeoBundle 'wombat256.vim'
 NeoBundle 'Sass'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'spencertipping/js-vim-highlighter'
+NeoBundle 'DBGp-Remote-Debugger-Interface'
 NeoBundle 'pangloss/vim-javascript' 
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-stylus'
@@ -71,6 +72,8 @@ set modifiable
 set formatoptions+=mM
 set ambiwidth=double
 set display+=lastline
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 
 " 検索でマークアップが画面の中央にくる
 "nnoremap n nzz
@@ -89,59 +92,17 @@ let g:vimfiler_as_default_explorer = 1
 
 "unite.vim settings
 "===================
-"  let g:unite_enable_start_insert = 1
-"" The prefix key.
-"  nnoremap    [unite]   <Nop>
-"  nmap    f [unite]
-"
-"  nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-"  nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
-"  nnoremap <silent> [unite]r  :<C-u>Unite -buffer-name=register register<CR>
-"  nnoremap <silent> [unite]o  :<C-u>Unite outline<CR>
-"  nnoremap  [unite]f  :<C-u>Unite source<CR>
-"
-"  autocmd FileType unite call s:unite_my_settings()
-"  function! s:unite_my_settings()"{{{
-"    " Overwrite settings.
-"
-"    nmap <buffer> <ESC>      <Plug>(unite_exit)
-"    imap <buffer> jj      <Plug>(unite_insert_leave)
-"    "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-"
-"    " <C-l>: manual neocomplcache completion.
-"    inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
-"
-"    " Start insert.
-"    "let g:unite_enable_start_insert = 1
-"  endfunction"}}}
-"
-"  let g:unite_source_file_mru_limit = 200
-"  "let g:unite_cursor_line_highlight = 'TabLineSel'
-"  "let g:unite_abbr_highlight = 'TabLine'
-"
-"  " For optimize.
-"  let g:unite_source_file_mru_filename_format = ''
-"
-"  " For unite-session.
-"  " Save session automatically.
-"  "let g:unite_source_session_enable_auto_save = 1
-"  " Load session automatically.
-"  "autocmd VimEnter * UniteSessionLoad
-"
-"  " For ack.
-"  if executable('ack-grep')
-"    let g:unite_source_grep_command = 'ack-grep'
-"    let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
-"    let g:unite_source_grep_recursive_opt = ''
-"  endif
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <Space> [unite]
 "起動時にインサートモード
 let g:unite_enable_start_insert = 1
-nnoremap <silent> ,ub :Unite buffer<CR>
-nnoremap <silent> ,uf :UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,uc :Unite bookmark<CR>
-nnoremap <silent> ,u. :Unite file_mru<CR>
-nnoremap <silent> ,uy :Unite -buffer-name=register register<CR>
-nnoremap <silent> ,ug :Unite grep%:-iHRn<CR>
+nnoremap <silent> [unite]b :Unite buffer<CR>
+nnoremap <silent> [unite]f :UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]c :Unite bookmark<CR>
+nnoremap <silent> [unite]. :Unite file_mru<CR>
+nnoremap <silent> [unite]y :Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]g :Unite grep%:-iHRn<CR>
 
 ""ESC二回で閉じる
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -161,6 +122,9 @@ function! s:unite_my_settings()"{{{
   "ctrl+jで横に分割して開く
   nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
   inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+  "ctrl+tで新しいタブに開く
+  nnoremap <silent> <buffer> <expr> <C-t> unite#do_action('tabnew')
+  inoremap <silent> <buffer> <expr> <C-t> unite#do_action('tabnew')
   "ctrl+oでその場所に開く
   nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
   inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
@@ -307,3 +271,39 @@ map <Down> <Nop>
 
 "no beep
 set visualbell
+
+"xdebug
+let g:debuggerPort=9001
+
+"カッコを補完
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+vnoremap { "zdi^V{<C-R>z}<ESC>
+vnoremap [ "zdi^V[<C-R>z]<ESC>
+vnoremap ( "zdi^V(<C-R>z)<ESC>
+vnoremap " "zdi^V"<C-R>z^V"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+
+"末尾にセミコロンをつけて改行する
+function! IsEndSemicolon()
+  let c = getline(".")[col("$")-2]
+  if c != ';'
+    return 1
+  else
+    return 0
+  endif
+endfunction
+inoremap <expr>;; IsEndSemicolon() ? "<C-O>$;<CR>" : "<C-O>$<CR>""""")''"")]""))
+"末尾にセミコロンを追加する
+function! IsEndComma()
+  let c = getline(".")[col("$")-2]
+  if c != ','
+    return 1
+  else
+    return 0
+  endif
+endfunction
+inoremap <expr>,, IsEndComma() ? "<C-O>$,<CR>" : "<C-O>$<CR>""""")''"")]""))
