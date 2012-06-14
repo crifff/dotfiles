@@ -18,7 +18,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'inkpot'
 NeoBundle 'wombat256.vim'
-NeoBundle 'Sass'
+"NeoBundle 'Sass'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'spencertipping/js-vim-highlighter'
 NeoBundle 'DBGp-Remote-Debugger-Interface'
@@ -29,6 +29,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'othree/html5.vim'
 NeoBundle 'xenoterracide/html.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'mattn/webapi-vim'
@@ -38,7 +39,6 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'edsono/vim-matchit'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'othree/eregex.vim'
-NeoBundle 'othree/html5.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'tpope/vim-fugitive'
@@ -74,6 +74,7 @@ set ambiwidth=double
 set display+=lastline
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
+set notitle
 
 " 検索でマークアップが画面の中央にくる
 "nnoremap n nzz
@@ -275,17 +276,6 @@ set visualbell
 "xdebug
 let g:debuggerPort=9001
 
-"カッコを補完
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
 
 "末尾にセミコロンをつけて改行する
 function! IsEndSemicolon()
@@ -307,3 +297,9 @@ function! IsEndComma()
   endif
 endfunction
 inoremap <expr>,, IsEndComma() ? "<C-O>$,<CR>" : "<C-O>$<CR>""""")''"")]""))
+
+set background=dark
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+hi IndentGuidesEven ctermbg=darkgrey
