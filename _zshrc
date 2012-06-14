@@ -71,6 +71,10 @@ if [ -x /usr/bin/git ]; then
   alias git=/usr/bin/git
 fi
 
+if [ -x ~/source/tig/tig ]; then
+  alias tig=~/source/tig/tig
+fi
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
