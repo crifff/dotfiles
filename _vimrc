@@ -18,11 +18,12 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'inkpot'
 NeoBundle 'wombat256.vim'
-"NeoBundle 'Sass'
+NeoBundle 'Sass'
 NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'tpope/vim-haml'
 NeoBundle 'spencertipping/js-vim-highlighter'
 NeoBundle 'DBGp-Remote-Debugger-Interface'
-NeoBundle 'pangloss/vim-javascript' 
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-stylus'
 NeoBundle 'kchmck/vim-coffee-script'
@@ -44,6 +45,7 @@ NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tpope/vim-markdown'
+NeoBundle 'vim-scripts/DBGp-client'
 
 filetype plugin indent on     " required!
 syntax on
@@ -62,7 +64,7 @@ set tabstop=2
 colorscheme wombat256mod
 
 set ruler
-set title
+set notitle
 set showmatch showmode showcmd
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
@@ -88,6 +90,11 @@ nnoremap ,l :execute '!php -l %'<CR>
 
 "vimfilerをデフォにする
 let g:vimfiler_as_default_explorer = 1
+
+"syntastic
+"==================
+"phpcsつかわない
+let g:syntastic_phpcs_disable=1
 
 "set tags=tags
 
@@ -274,7 +281,7 @@ map <Down> <Nop>
 set visualbell
 
 "xdebug
-let g:debuggerPort=9001
+let g:debuggerPort=9000
 
 
 "末尾にセミコロンをつけて改行する
@@ -303,3 +310,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 2
 hi IndentGuidesEven ctermbg=darkgrey
+
+"行末のスペースをハイライト
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+autocmd WinEnter * match WhitespaceEOL /\s\+$/
