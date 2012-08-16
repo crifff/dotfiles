@@ -50,16 +50,16 @@ setopt COMPLETE_IN_WORD
 autoload -Uz is-at-least
 
 #自動補完auto-fu.zsh
-if is-at-least 4.3.10; then
-  if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-      auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-  fi
-fi
+#if is-at-least 4.3.10; then
+#  if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+#    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+#    function zle-line-init () {
+#      auto-fu-init
+#    }
+#    zle -N zle-line-init
+#    zstyle ':completion:*' completer _oldlist _complete
+#  fi
+#fi
 
 #alias
 if [ -x ~/source/vim73/src/vim ]; then
@@ -105,9 +105,9 @@ export GREP_OPTIONS
 ### バイナリファイルにはマッチさせない。
 GREP_OPTIONS="--binary-files=without-match"
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+#GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 ### 拡張子が.tmpのファイルは無視する。
-GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
+#GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 ## 管理用ディレクトリを無視する。
 #if grep --help | grep -q -- --exclude-dir; then
 #    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
@@ -162,3 +162,5 @@ precmd() {
 if [ -x ~/.rbenv/bin/ ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
 fi
+
+source .zsh/git-completion.bash
