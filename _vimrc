@@ -8,7 +8,6 @@ endif
 
 NeoBundle 'sudo.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Sixeight/unite-grep'
 NeoBundle 'Shougo/vimproc'
@@ -22,7 +21,7 @@ NeoBundle 'Sass'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'spencertipping/js-vim-highlighter'
-NeoBundle 'DBGp-Remote-Debugger-Interface'
+"NeoBundle 'DBGp-Remote-Debugger-Interface'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-stylus'
@@ -45,7 +44,7 @@ NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tpope/vim-markdown'
-NeoBundle 'vim-scripts/DBGp-client'
+"NeoBundle 'vim-scripts/DBGp-client'
 
 filetype plugin indent on     " required!
 syntax on
